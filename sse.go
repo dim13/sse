@@ -16,7 +16,7 @@ type Broker struct {
 
 // Write implements io.Writer
 func (b *Broker) Write(p []byte) (n int, err error) {
-	b.clients.Range(func(key, value interface{}) bool {
+	b.clients.Range(func(key, value any) bool {
 		ch := key.(chan string)
 		select {
 		case ch <- string(p):
